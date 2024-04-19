@@ -1,0 +1,23 @@
+<!-- consulta-produto.component.html -->
+
+<!-- Barra de busca -->
+<app-barra-busca (buscar)="onBuscar($event)"></app-barra-busca>
+
+<!-- Tabela para exibir a lista de produtos -->
+<app-lista-resultados (editar)="onEditar($event)" (excluir)="onExcluir($event)" [resultadoList]="resultadoList" [colunaList]="colunaList"></app-lista-resultados>
+  
+<p *ngIf="resultadoList.length === 0">
+  <br><br> 
+  {{mensagemRegistroNaoEncontrado}}
+  <br><br>
+</p>
+
+<!-- Modal de confirmação de exclusão -->
+<app-confirmacao-exclusao-modal
+  [modalAberto]="confirmacaoExclusaoModal"
+  [entidade]="entidade"
+  [artigo]="artigo"
+  (cancelar)="onFecharModal()"
+  (confirmar)="onConfirmarExclusao()">
+</app-confirmacao-exclusao-modal>
+

@@ -1,0 +1,14 @@
+<!-- barra-busca.component.html -->
+
+<h2>Consulta de {{entidade}}</h2>
+
+<div class="input-group mb-3">
+    <input type="text" class="form-control" [(ngModel)]="termoBusca" placeholder="Buscar {{entidade}}..." aria-label="Buscar" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" (click)="onBuscar()">Buscar</button>
+    </div>
+</div>
+  
+
+<!-- Botão para cadastrar novo -->
+<button routerLink="/cadastro-{{entidade}}" class="btn btn-primary">Cadastrar {{entidade}}</button>
