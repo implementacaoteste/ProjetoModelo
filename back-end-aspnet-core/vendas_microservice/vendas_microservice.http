@@ -1,0 +1,6 @@
+@vendas_microservice_HostAddress = http://localhost:5074
+
+GET {{vendas_microservice_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

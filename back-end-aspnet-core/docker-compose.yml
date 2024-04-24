@@ -1,0 +1,66 @@
+# docker-compose.yml
+
+version: '3.7'
+
+services:
+  clientes_microservice:
+    build:
+      context: .
+      dockerfile: clientes_microservice/Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      DB_CONNECTION_STRING: "connection_string_here"
+
+  # fornecedores_microservice:
+  #   build:
+  #     context: .
+  #     dockerfile: fornecedores_microservice/Dockerfile
+  #   ports:
+  #     - "5001:80"
+  #   environment:
+  #     ASPNETCORE_ENVIRONMENT: Production
+  #     DB_CONNECTION_STRING: "connection_string_here"
+  #   depends_on:
+  #     - clientes_microservice
+
+  # produtos_microservice:
+  #   build:
+  #     context: .
+  #     dockerfile: produtos_microservice/Dockerfile
+  #   ports:
+  #     - "5002:80"
+  #   environment:
+  #     ASPNETCORE_ENVIRONMENT: Production
+  #     DB_CONNECTION_STRING: "connection_string_here"
+  #   depends_on:
+  #     - clientes_microservice
+
+  # vendas_microservice:
+  #   build:
+  #     context: .
+  #     dockerfile: vendas_microservice/Dockerfile
+  #   ports:
+  #     - "5003:80"
+  #   environment:
+  #     ASPNETCORE_ENVIRONMENT: Production
+  #     DB_CONNECTION_STRING: "connection_string_here"
+  #   depends_on:
+  #     - clientes_microservice
+  #     - fornecedores_microservice
+  #     - produtos_microservice
+
+  # relatorios_microservice:
+  #   build:
+  #     context: .
+  #     dockerfile: relatorios_microservice/Dockerfile
+  #   ports:
+  #     - "5004:80"
+  #   environment:
+  #     ASPNETCORE_ENVIRONMENT: Production
+  #     DB_CONNECTION_STRING: "connection_string_here"
+  #   depends_on:
+  #     - vendas_microservice
+
+
