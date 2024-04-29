@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  back-end:
+    container_name: back-end
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      FLASK_APP: run.py
+      FLASK_ENV: development
+      SQLALCHEMY_DATABASE_URI: "mysql://user:password@database/app_db"  # Defina as credenciais do MySQL
+    depends_on:
+      - database
+
+  database:
+    image: "mysql:latest"  # Use a imagem do MySQL
+    container_name: mysql-db
+    environment:
+      MYSQL_DATABASE: "SIM"  # Defina o nome do banco de dados
+      MYSQL_USER: "SUPORTE"  # Defina o usuário do MySQL
+      MYSQL_PASSWORD: "2@19SurfOnline"  # Defina a senha do MySQL
+      MYSQL_ROOT_PASSWORD: "root_password"  # Defina a senha do root do MySQL
+    volumes:
+      - ./../db:/var/lib/mysql  # Mapeia um volume para armazenar os dados do MySQL
+
+volumes:
+  db:  # Define o volume para armazenar os dados do MySQL
