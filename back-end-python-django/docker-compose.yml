@@ -1,3 +1,5 @@
+# docker-compose.yml
+
 version: '3.8'
 
 services:
@@ -16,7 +18,7 @@ services:
   app:
     build: .
     volumes:
-      - SIM:/usr/src/app
+      - .:/usr/src/app
     ports:
       - "8000:8000"
     depends_on:
@@ -24,4 +26,4 @@ services:
 
 volumes:
   db_mysql:
-  SIM:
+  .:
