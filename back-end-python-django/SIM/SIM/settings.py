@@ -92,23 +92,23 @@ WSGI_APPLICATION = 'SIM.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'sim_db',
-#         'USER': 'sim_user',
-#         'PASSWORD': 'sim_password',
-#         'HOST': 'db',  # Nome do serviço do banco de dados
-#         'PORT': '3306',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'gestao_mercearia_db',  # Nome do banco de dados
+        'USER': 'usuario',  # Usuário do banco de dados
+        'PASSWORD': '123457',  # Senha do banco de dados
+        'HOST': 'db',  # Nome do serviço do banco de dados
+        'PORT': '3306',
+    }
+}
 
 
 
