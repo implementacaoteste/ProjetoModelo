@@ -3,6 +3,18 @@
 IMAGE_NAME = image_python_django
 CONTAINER_NAME = container_python_django
 
+PYTHON = python3
+VENV_NAME = env
+VENV_DIR = $(CURDIR)/$(VENV_NAME)
+PIP = $(VENV_DIR)/bin/pip
+ACTIVATE = $(VENV_DIR)/bin/activate
+
+# Tarefa para criar o ambiente virtual
+venv:
+	$(PYTHON) -m venv $(VENV_NAME)
+	. $(ACTIVATE)
+	$(PIP) install -r SIM/requirements.txt
+
 # Tarefa para construir a imagem Docker da aplicação
 build:
 	docker-compose build --build-arg IMAGE_NAME=$(IMAGE_NAME)
@@ -39,3 +51,6 @@ interativo:
 
 ps:
 	docker ps -a
+
+mysql:
+	docker exec -it back-end-python-django_db_1 mysql -u root -p

@@ -33,8 +33,8 @@ class UsuarioViewSet(viewsets.ModelViewSet):
             usuario = self.get_object()
             # Adicione lógica de negócios aqui se necessário
             # Exemplo: Verifica se o usuário está ativo
-            if not usuario.is_active:
-                return Response({'erro': 'Usuário está inativo.'}, status=status.HTTP_404_NOT_FOUND)
+            # if not usuario.is_active:
+            #     return Response({'erro': 'Usuário está inativo.'}, status=status.HTTP_404_NOT_FOUND)
 
             usuario_serializer = self.get_serializer(usuario)
             return Response(usuario_serializer.data, status=status.HTTP_200_OK)
