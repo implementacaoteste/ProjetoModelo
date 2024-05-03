@@ -33,8 +33,8 @@ run:
 
 # Tarefa para criar e aplicar migrações no banco de dados
 migrate:
-	python manage.py makemigrations
-	python manage.py migrate
+	docker-compose exec back-end-python-django2_app_1 python manage.py makemigrations
+	docker-compose exec back-end-python-django2_app_1 python manage.py migrate
 
 # Tarefa para executar os testes da aplicação
 test:

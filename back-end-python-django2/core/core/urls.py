@@ -12,6 +12,7 @@ urlpatterns = [
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
 
     # URLs para as interfaces de documentação do Swagger e ReDoc
+    path('', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger'),
     path('swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger'),
     path('schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]
