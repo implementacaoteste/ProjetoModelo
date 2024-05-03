@@ -12,8 +12,8 @@ ACTIVATE = $(VENV_DIR)/bin/activate
 # Tarefa para criar o ambiente virtual
 venv:
 	$(PYTHON) -m venv $(VENV_NAME)
-	. $(ACTIVATE)
-	$(PIP) install -r SIM/requirements.txt
+	source $(ACTIVATE)
+	$(PIP) install -r requirements.txt
 
 # Tarefa para construir a imagem Docker da aplicação
 build:
@@ -33,8 +33,8 @@ run:
 
 # Tarefa para criar e aplicar migrações no banco de dados
 migrate:
-	python manage.py makemigrations
-	python manage.py migrate
+	docker-compose exec back-end-python-django_app_1 python manage.py makemigrations
+	docker-compose exec back-end-python-django_app_1 python manage.py migrate
 
 # Tarefa para executar os testes da aplicação
 test:
@@ -45,12 +45,13 @@ logs:
 	docker-compose logs
 
 # Tarefa para acessar o terminal interativo do contêiner da aplicação
-interativo:
-	docker-compose up -d
+app:
 	docker-compose exec app bash
 
 ps:
-	docker ps -a
+	docker-compose ps -a
 
 mysql:
-	docker exec -it back-end-python-django_db_1 mysql -u root -p
+	docker exec -it back-end-python-django_db_1 mysql -u usuario_db -p
+
+restart: down build up ps
