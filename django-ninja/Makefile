@@ -32,13 +32,17 @@ down:
 run:
 	python manage.py runserver
 
+sleep:
+	sleep 20
+
 # Tarefa para criar e aplicar migrações no banco de dados
+migrate_sleep: sleep migrate
+
 migrate:
-	sleep 10
 	docker exec $(CONTAINER_NAME) python manage.py makemigrations --no-input
 	docker exec $(CONTAINER_NAME) python manage.py migrate --no-input
-	docker exec $(CONTAINER_NAME) python manage.py seeds_produto
-	@echo "Seeds da entidade Produto criados com sucesso!"
+	# docker exec $(CONTAINER_NAME) python manage.py seeds_produto
+	# @echo "Seeds da entidade Produto criados com sucesso!"
 
 # Tarefa para executar os testes da aplicação
 test:
@@ -58,18 +62,23 @@ ps:
 mysql:
 	docker exec -it container_db mysql -u usuario_db -p
 
-restart: down build up migrate ps
+restart: down build up migrate_sleep ps
 
 criar:
     # make criar APP_NOME=meu_app
 	mkdir -p src/apps/$(APP_NOME)
 	mkdir -p src/apps/$(APP_NOME)/data
+	echo "" > src/apps/$(APP_NOME)/data/__init__.py
 	mkdir -p src/apps/$(APP_NOME)/management
 	mkdir -p src/apps/$(APP_NOME)/management/commands
 	mkdir -p src/apps/$(APP_NOME)/models
+	echo "# ./src/apps/$(APP_NOME)/models/__init__.py\n\n# from .entidade import Entidade" > src/apps/$(APP_NOME)/models/__init__.py
 	mkdir -p src/apps/$(APP_NOME)/schemas
+	echo "" > src/apps/$(APP_NOME)/schemas/__init__.py
 	mkdir -p src/apps/$(APP_NOME)/services
+	echo "" > src/apps/$(APP_NOME)/services/__init__.py
 	mkdir -p src/apps/$(APP_NOME)/views
+	echo "" > src/apps/$(APP_NOME)/views/__init__.py
 	echo  > src/apps/$(APP_NOME)/__init__.py
 	echo "# ./src/apps/$(APP_NOME)/admin.py\n\nfrom django.contrib import admin\n\n# Register your models here." > src/apps/$(APP_NOME)/admin.py
 	echo "# ./src/apps/$(APP_NOME)/apps.py\n\nfrom django.apps import AppConfig\n\nclass $(shell echo $(APP_NOME) | sed 's/.*/\u&/')Config(AppConfig):\n\tdefault_auto_field = 'django.db.models.BigAutoField'\n\tname = 'apps.$(APP_NOME)'\n\n# TODO: não esqueça de adicionar o seguinte conteúdo no INSTALLED_APPS do settings.py: 'apps.aplicativo'," > src/apps/$(APP_NOME)/apps.py
@@ -85,6 +94,15 @@ criar_entidade:
 	echo "# ./src/apps/$(APP_NOME)/schemas/$(ENTIDADE_NOME)_schema.py\n\nfrom ninja import Schema\n\nclass $(shell echo $(ENTIDADE_NOME) | sed 's/.*/\u&/')Schema(Schema):\n\t# TODO: Coloque aqui as colunas do schema.\n\t# descricao: str\n\t# ativo: bool\n\tpass" > src/apps/$(APP_NOME)/schemas/$(ENTIDADE_NOME)_schema.py
 
 	# TODO: Colocar tarefa mandando importar a router no urls.py do core: from apps.aplicativo.views.fornecedor_view import fornecedor_router
+
+testar:
+	clear
+	rm -rf src/apps/cadastro
+	rm -rf src/apps/restaurante
+	make criar APP_NOME=cadastro
+	make criar APP_NOME=restaurante
+	make criar_entidade APP_NOME=cadastro ENTIDADE_NOME=produto
+	make criar_entidade APP_NOME=restaurante ENTIDADE_NOME=atendente
 
 limpar:
 	clear
