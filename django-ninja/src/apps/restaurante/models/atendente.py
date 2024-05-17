@@ -1,8 +1,8 @@
-# ./src/apps/cadastro/models/produto.py
+# ./src/apps/restaurante/models/atendente.py
 
 from django.db import models
 
-class Produto(models.Model):
+class Atendente(models.Model):
 	descricao = models.CharField(max_length=150)
 	ativo = models.BooleanField(default=True)
 

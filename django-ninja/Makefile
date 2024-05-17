@@ -81,7 +81,7 @@ criar:
 	echo "" > src/apps/$(APP_NOME)/views/__init__.py
 	echo  > src/apps/$(APP_NOME)/__init__.py
 	echo "# ./src/apps/$(APP_NOME)/admin.py\n\nfrom django.contrib import admin\n\n# Register your models here." > src/apps/$(APP_NOME)/admin.py
-	echo "# ./src/apps/$(APP_NOME)/apps.py\n\nfrom django.apps import AppConfig\n\nclass $(shell echo $(APP_NOME) | sed 's/.*/\u&/')Config(AppConfig):\n\tdefault_auto_field = 'django.db.models.BigAutoField'\n\tname = 'apps.$(APP_NOME)'\n\n# TODO: não esqueça de adicionar o seguinte conteúdo no INSTALLED_APPS do settings.py: 'apps.aplicativo'," > src/apps/$(APP_NOME)/apps.py
+	echo "# ./src/apps/$(APP_NOME)/apps.py\n\nfrom django.apps import AppConfig\n\nclass $(shell echo $(APP_NOME) | sed 's/.*/\u&/')Config(AppConfig):\n\tdefault_auto_field = 'django.db.models.BigAutoField'\n\tname = 'apps.$(APP_NOME)'\n\n# TODO: não esqueça de adicionar o seguinte conteúdo no INSTALLED_APPS do settings.py: 'apps.$(APP_NOME)'," > src/apps/$(APP_NOME)/apps.py
 	echo "# ./src/apps/$(APP_NOME)/api.py\n\nfrom ninja import NinjaAPI\n#from .views.produto_view import produto_router as router_produto\n\napi = NinjaAPI(urls_namespace='$(APP_NOME)-api')\n#api.add_router("produto", router_produto)" > src/apps/$(APP_NOME)/api.py
 	echo "# ./src/apps/$(APP_NOME)/urls.py\n\nfrom django.urls import path, include\nfrom .api import api\n\nurlpatterns = [\n\tpath('', include(api.urls())),\n]" > src/apps/$(APP_NOME)/urls.py
 	
@@ -97,12 +97,12 @@ criar_entidade:
 
 testar:
 	clear
-	rm -rf src/apps/cadastro
-	rm -rf src/apps/restaurante
+	# rm -rf src/apps/cadastro
 	make criar APP_NOME=cadastro
-	make criar APP_NOME=restaurante
 	make criar_entidade APP_NOME=cadastro ENTIDADE_NOME=produto
-	make criar_entidade APP_NOME=restaurante ENTIDADE_NOME=atendente
+	# rm -rf src/apps/restaurante
+	# make criar APP_NOME=restaurante
+	# make criar_entidade APP_NOME=restaurante ENTIDADE_NOME=atendente
 
 limpar:
 	clear
