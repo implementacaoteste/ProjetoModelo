@@ -62,7 +62,7 @@ ps:
 mysql:
 	docker exec -it container_db mysql -u usuario_db -p
 
-restart: down build up migrate_sleep ps
+restart: down build up ps
 
 criar:
     # make criar APP_NOME=meu_app
@@ -70,7 +70,9 @@ criar:
 	mkdir -p src/apps/$(APP_NOME)/data
 	echo "" > src/apps/$(APP_NOME)/data/__init__.py
 	mkdir -p src/apps/$(APP_NOME)/management
+	echo "" > src/apps/$(APP_NOME)/management/__init__.py
 	mkdir -p src/apps/$(APP_NOME)/management/commands
+	echo "" > src/apps/$(APP_NOME)/management/commands/__init__.py
 	mkdir -p src/apps/$(APP_NOME)/models
 	echo "# ./src/apps/$(APP_NOME)/models/__init__.py\n\n# from .entidade import Entidade" > src/apps/$(APP_NOME)/models/__init__.py
 	mkdir -p src/apps/$(APP_NOME)/schemas
@@ -109,7 +111,7 @@ limpar:
 	make down
 	docker ps
 	docker images
-	docker rmi django-ninja-app
+	docker rmi django-ninja_app
 	docker rmi mysql
 	docker image prune
 	docker ps
