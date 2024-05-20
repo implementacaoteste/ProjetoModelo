@@ -19,18 +19,17 @@ WORKDIR /app
 # Instalar Python, pacotes de desenvolvimento, e libmysqlclient-dev
 RUN apt-get update -y && apt-get install -y \
     python3.11 python3.11-venv python3-pip \
-    python3.11-dev build-essential libmysqlclient-dev
+    python3.11-dev build-essential libmysqlclient-dev # tzdata
+
+# Configurar fuso horário
+# RUN ln -fs /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
+# RUN dpkg-reconfigure --frontend noninteractive tzdata
 
 # Criar e ativar ambiente virtual
 RUN python3.11 -m venv /venv
 
 # Definir PATH do ambiente virtual
 ENV PATH="/venv/bin:$PATH"
-
-# Configurar fuso horário
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install tzdata
-RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
-RUN dpkg-reconfigure --frontend noninteractive tzdata
 
 # Copiar arquivo requirements.txt e instalar dependências
 COPY requirements.txt .

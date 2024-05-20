@@ -1,9 +1,11 @@
+# ./src/core/management/commands/rundjangoserver.py
+
 from django.core.management.base import BaseCommand
 from django.core.management import call_command
 from time import sleep
 
 class Command(BaseCommand):
-    help = 'Run the server with automatic migrations'
+    help = 'Executa o servidor com migrações automáticas e dados iniciais'
 
     def add_arguments(self, parser):
         # Adicione os argumentos do runserver
@@ -21,6 +23,10 @@ class Command(BaseCommand):
         self.stdout.write('Makemigrations concluído.')
         call_command('migrate')
         self.stdout.write('Migrate concluído.')
+
+        self.stdout.write('Iniciando o seed de produtos...')
+        call_command('seeds_produto')
+        self.stdout.write('Seed de produtos concluído.')
 
         # Inicia o servidor
         addrport = options['addrport']

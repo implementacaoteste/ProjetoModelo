@@ -3,5 +3,7 @@
 from ninja import Schema
 
 class ProdutoSchema(Schema):
-	descricao: str
-	ativo: bool
+    nome: str
+    preco: float
+    quantidade: int
+    ativo: bool

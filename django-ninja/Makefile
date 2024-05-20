@@ -11,6 +11,8 @@ ACTIVATE = $(VENV_DIR)/bin/activate
 
 # Tarefa para criar o ambiente virtual
 venv:
+	apt-get update
+	apt-get install -y build-essential libmysqlclient-dev
 	$(PYTHON) -m venv $(VENV_NAME)
 	source $(ACTIVATE)
 	$(PIP) install -r requirements.txt
@@ -111,12 +113,22 @@ limpar:
 	make down
 	docker ps
 	docker images
-	docker rmi django-ninja_app
+	docker rmi django-ninja-app
 	docker rmi mysql
 	docker image prune
+	rm -rf db_mysql
+	rm -rf src/apps/cadastro/__pycache__/
+	rm -rf src/apps/cadastro/management/__pycache__/
+	rm -rf src/apps/cadastro/models/__pycache__/
+	rm -rf src/apps/cadastro/migrations
+	rm -rf src/apps/restaurante/__pycache__/
+	rm -rf src/apps/restaurante/management/__pycache__/
+	rm -rf src/apps/restaurante/models/__pycache__/
+	rm -rf src/core/__pycache__/
+	rm -rf src/core/management/__pycache__/
+	rm -rf src/core/management/commands/__pycache__/
+	rm -rf src/apps/restaurante/migrations
 	docker ps
 	docker images
-	rm -rf db_mysql
-	# rm -rf src/apps/aplicativo/migrations
 	sleep 2
 	clear
