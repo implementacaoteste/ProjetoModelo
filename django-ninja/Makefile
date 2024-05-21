@@ -119,11 +119,21 @@ limpar:
 	rm -rf db_mysql
 	rm -rf src/apps/cadastro/__pycache__/
 	rm -rf src/apps/cadastro/management/__pycache__/
+	rm -rf src/apps/cadastro/management/commands/__pycache__/
 	rm -rf src/apps/cadastro/models/__pycache__/
+	rm -rf src/apps/cadastro/views/__pycache__/
+	rm -rf src/apps/cadastro/schemas/__pycache__/
+	rm -rf src/apps/cadastro/data/__pycache__/
+	rm -rf src/apps/cadastro/services/__pycache__/
 	rm -rf src/apps/cadastro/migrations
 	rm -rf src/apps/restaurante/__pycache__/
 	rm -rf src/apps/restaurante/management/__pycache__/
+	rm -rf src/apps/restaurante/management/commands/__pycache__/
 	rm -rf src/apps/restaurante/models/__pycache__/
+	rm -rf src/apps/restaurante/views/__pycache__/
+	rm -rf src/apps/restaurante/schemas/__pycache__/
+	rm -rf src/apps/restaurante/data/__pycache__/
+	rm -rf src/apps/restaurante/services/__pycache__/
 	rm -rf src/core/__pycache__/
 	rm -rf src/core/management/__pycache__/
 	rm -rf src/core/management/commands/__pycache__/
