@@ -86,15 +86,11 @@ testar:
 limpar:
 	clear
 	make down
-	docker ps
-	docker images
 	docker rmi django-ninja-app
 	docker rmi mysql
 	docker image prune
 	rm -rf db_mysql
 	python3 scripts/remove_pycache.py
-	rm -rf src/apps/cadastro/migrations
-	rm -rf src/apps/restaurante/migrations
 	docker ps
 	docker images
 	sleep 2
