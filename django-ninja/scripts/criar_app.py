@@ -1,3 +1,5 @@
+# ./scripts/criar_app.py
+
 import os
 import sys
 

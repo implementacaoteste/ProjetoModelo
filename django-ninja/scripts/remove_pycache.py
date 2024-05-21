@@ -1,3 +1,5 @@
+# ./scripts/remove_pycache.py
+
 import os
 import shutil
 
