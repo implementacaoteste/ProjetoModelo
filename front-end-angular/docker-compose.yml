@@ -1,0 +1,14 @@
+# ./docker-compose.yml
+
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/dist
+    command: ["http-server", "dist/front-end-angular/browser", "-p", "8080"]
+
