@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./django-ninja
+    container_name: container_backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - TZ=America/Sao_Paulo
+
+  frontend:
+    build:
+      context: ./front-end-angular
+    container_name: container_frontend
+    ports:
+      - "8080:8080"
+
+  db:
+    image: mysql
+    container_name: container_db
+    environment:
+      MYSQL_DATABASE: gestao_db
+      MYSQL_USER: usuario_db
+      MYSQL_PASSWORD: 123457
+      MYSQL_ROOT_PASSWORD: 123
+    volumes:
+      - ./django-ninja/db_mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
