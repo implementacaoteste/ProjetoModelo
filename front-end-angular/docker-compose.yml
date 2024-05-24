@@ -4,6 +4,7 @@ version: '3'
 services:
   frontend:
     build: .
+    container_name: container_frontend
     ports:
       - "8080:8080"
     volumes:
