@@ -66,24 +66,15 @@ mysql:
 
 restart: down build up ps
 
-criar:
+make_app:
     # make criar APP_NOME=meu_app
 	python3 scripts/criar_app.py $(APP_NOME)
 	
-criar_entidade:
+make_entity:
 	# make criar_entidade APP_NOME=aplicativo ENTIDADE_NOME=fornecedor
 	python3 scripts/criar_entidade.py $(APP_NOME) $(ENTIDADE_NOME)
 
-testar:
-	clear
-	# rm -rf src/apps/cadastro
-	make criar APP_NOME=cadastro
-	make criar_entidade APP_NOME=cadastro ENTIDADE_NOME=produto
-	# rm -rf src/apps/restaurante
-	# make criar APP_NOME=restaurante
-	# make criar_entidade APP_NOME=restaurante ENTIDADE_NOME=atendente
-
-limpar:
+clear:
 	clear
 	make down
 	docker rmi django-ninja-app
