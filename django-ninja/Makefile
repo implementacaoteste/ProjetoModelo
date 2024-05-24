@@ -55,8 +55,8 @@ logs:
 	docker-compose logs
 
 # Tarefa para acessar o terminal interativo do contêiner da aplicação
-app:
-	docker-compose exec app bash
+backend:
+	docker-compose exec backend bash
 
 ps:
 	docker ps -a
@@ -78,7 +78,7 @@ make_entity:
 clear:
 	clear
 	make down
-	docker rmi django-ninja-app
+	docker rmi django-ninja-backend
 	docker rmi mysql
 	docker image prune
 	rm -rf db_mysql
