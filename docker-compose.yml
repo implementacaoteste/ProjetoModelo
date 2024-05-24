@@ -7,6 +7,8 @@ services:
     build:
       context: ./django-ninja
     container_name: container_backend
+    volumes:
+      - ./django-ninja/src:/app
     ports:
       - "8000:8000"
     depends_on:
@@ -33,3 +35,6 @@ services:
       - ./django-ninja/db_mysql:/var/lib/mysql
     ports:
       - "3306:3306"
+
+
+      
