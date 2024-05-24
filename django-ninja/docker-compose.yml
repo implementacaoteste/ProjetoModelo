@@ -1,4 +1,4 @@
-# ./docker-compose.yml
+# ./django-ninja/docker-compose.yml
 
 version: '3.8'
 
@@ -16,9 +16,9 @@ services:
     ports:
       - "3306:3306"
 
-  app:
+  backend:
     build: .
-    container_name: container_app
+    container_name: container_backend
     volumes:
       - ./src:/app
     ports:

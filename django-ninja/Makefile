@@ -1,7 +1,7 @@
-# ./Makefile
+# ./django-ninja/Makefile
 
 IMAGE_NAME = image_python_django
-CONTAINER_NAME = container_app
+CONTAINER_BACKEND = container_backend
 
 PYTHON = python3
 VENV_NAME = env
@@ -41,9 +41,9 @@ sleep:
 migrate_sleep: sleep migrate
 
 migrate:
-	docker exec $(CONTAINER_NAME) python manage.py makemigrations --no-input
-	docker exec $(CONTAINER_NAME) python manage.py migrate --no-input
-	# docker exec $(CONTAINER_NAME) python manage.py seeds_produto
+	docker exec $(CONTAINER_BACKEND) python manage.py makemigrations --no-input
+	docker exec $(CONTAINER_BACKEND) python manage.py migrate --no-input
+	# docker exec $(CONTAINER_BACKEND) python manage.py seeds_produto
 	# @echo "Seeds da entidade Produto criados com sucesso!"
 
 # Tarefa para executar os testes da aplicação
@@ -59,7 +59,8 @@ app:
 	docker-compose exec app bash
 
 ps:
-	docker-compose ps -a
+	docker ps -a
+	docker images
 
 mysql:
 	docker exec -it container_db mysql -u usuario_db -p
@@ -86,3 +87,4 @@ clear:
 	docker images
 	sleep 2
 	clear
+
