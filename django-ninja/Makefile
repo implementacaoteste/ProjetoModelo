@@ -1,7 +1,7 @@
-# ./Makefile
+# ./django-ninja/Makefile
 
 IMAGE_NAME = image_python_django
-CONTAINER_NAME = container_app
+CONTAINER_BACKEND = container_backend
 
 PYTHON = python3
 VENV_NAME = env
@@ -41,9 +41,9 @@ sleep:
 migrate_sleep: sleep migrate
 
 migrate:
-	docker exec $(CONTAINER_NAME) python manage.py makemigrations --no-input
-	docker exec $(CONTAINER_NAME) python manage.py migrate --no-input
-	# docker exec $(CONTAINER_NAME) python manage.py seeds_produto
+	docker exec $(CONTAINER_BACKEND) python manage.py makemigrations --no-input
+	docker exec $(CONTAINER_BACKEND) python manage.py migrate --no-input
+	# docker exec $(CONTAINER_BACKEND) python manage.py seeds_produto
 	# @echo "Seeds da entidade Produto criados com sucesso!"
 
 # Tarefa para executar os testes da aplicação
@@ -59,31 +59,23 @@ app:
 	docker-compose exec app bash
 
 ps:
-	docker-compose ps -a
+	docker ps -a
+	docker images
 
 mysql:
 	docker exec -it container_db mysql -u usuario_db -p
 
 restart: down build up ps
 
-criar:
+make_app:
     # make criar APP_NOME=meu_app
 	python3 scripts/criar_app.py $(APP_NOME)
 	
-criar_entidade:
+make_entity:
 	# make criar_entidade APP_NOME=aplicativo ENTIDADE_NOME=fornecedor
 	python3 scripts/criar_entidade.py $(APP_NOME) $(ENTIDADE_NOME)
 
-testar:
-	clear
-	# rm -rf src/apps/cadastro
-	make criar APP_NOME=cadastro
-	make criar_entidade APP_NOME=cadastro ENTIDADE_NOME=produto
-	# rm -rf src/apps/restaurante
-	# make criar APP_NOME=restaurante
-	# make criar_entidade APP_NOME=restaurante ENTIDADE_NOME=atendente
-
-limpar:
+clear:
 	clear
 	make down
 	docker rmi django-ninja-app
@@ -95,3 +87,4 @@ limpar:
 	docker images
 	sleep 2
 	clear
+
