@@ -1,32 +1,29 @@
-// cadastro-produto.component.html
+// ./src/app/components/cadastro-produto/cadastro-produto.component.html
 
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Produto } from '../../models/produto';
 import { ProdutoService } from '../../services/produto.service';
-import { ActivatedRoute, Route } from '@angular/router';
-import { Router } from '@angular/router';
 import { MensagemCRUDComponent } from '../biblioteca-de-components/mensagem-crud/mensagem-crud.component';
-import { CommonModule } from '@angular/common';
-
+import { ActivatedRoute, Route } from '@angular/router';
 @Component({
   selector: 'app-cadastro-produto',
   standalone: true,
-  imports: [
-    FormsModule,
-    CommonModule,
-    MensagemCRUDComponent,
-  ],
   templateUrl: './cadastro-produto.component.html',
-  styleUrl: './cadastro-produto.component.css'
+  imports: [FormsModule, MensagemCRUDComponent, Route],
+  styleUrls: ['./cadastro-produto.component.css']
 })
 export class CadastroProdutoComponent {
-  novoProduto: Produto = new Produto();
-  botaoAcao: string = 'Salvar';
-  letraDoCRUD: string = 'C';
+  // Declaração de variáveis
+  novoProduto: any = {
+    nome: '',
+    descricao: '',
+    preco: 0
+  };
   tipoMensagem: 'sucesso' | 'erro' | 'aviso' = 'sucesso';
-  mensagem: string | null = null;
-  nomeEntidade: string = 'O produto';
+  nomeEntidade: string = 'Produto';
+  botaoAcao: string = 'Salvar';
+  mensagem: string = '';
+  letraDoCRUD: string = 'C';
 
   constructor(
     private route: ActivatedRoute,
@@ -48,22 +45,34 @@ export class CadastroProdutoComponent {
   }
 
   salvar(): void {
-    if (this.botaoAcao === 'Salvar')
+    if (this.botaoAcao === 'Salvar') 
       this.produtoService.inserir(this.novoProduto);
-    else
+    else 
       this.produtoService.atualizar(this.novoProduto.id, this.novoProduto);
 
-    this.tipoMensagem = 'sucesso';
-    this.mensagem = 'asdfe';
+      this.tipoMensagem = 'sucesso';
+      this.mensagem = 'Produto salvo com sucesso!';
   }
-  
-  exibirMensagem(mensagem?: string): void {
-    mensagem = 'Registro salvo com sucesso!'
+
+  limparFormulario() {
+    this.novoProduto = {
+      nome: '',
+      descricao: '',
+      preco: 0
+    };
+    this.mensagem = '';
   }
-  
-  onConfirmarMensagem(): void {
-    this.mensagem = null;
-    this.router.navigate(['/consulta-produto']);
+
+  // Lógica para editar um produto (exemplo)
+  editarProduto(produto: any) {
+    this.novoProduto = { ...produto };
+    this.botaoAcao = 'Atualizar';
+  }
+
+  // Lógica para cancelar a edição
+  cancelarEdicao() {
+    this.limparFormulario();
+    this.botaoAcao = 'Salvar';
   }
 }
 

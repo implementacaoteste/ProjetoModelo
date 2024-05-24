@@ -1,40 +1,39 @@
-// produto.service.ts
-
+// ./src/app/services/produto.service.ts
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { Produto } from '../models/produto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProdutoService {
-  private produtos: Produto[] = [];
+  private apiUrl = environment.apiUrl;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  buscar(texto?: string): Produto[] {
+  buscar(texto?: string): Observable<Produto[]> {
     if (texto) {
-      return this.produtos.filter(p => p.nome.toLowerCase().includes(texto.toLowerCase()));
+      return this.http.get<Produto[]>(`${this.apiUrl}?search=${texto}`);
     }
-    return this.produtos;
+    return this.http.get<Produto[]>(this.apiUrl);
   }
 
-  buscarPorId(id: number): Produto {
-    return this.produtos.filter(p => p.id === id)[0];
+  buscarPorId(id: number): Observable<Produto> {
+    return this.http.get<Produto>(`${this.apiUrl}${id}`);
   }
 
-  inserir(produto: Produto): void {
-    produto.id = this.produtos.length + 1;
-    this.produtos.push(produto);
+  inserir(produto: Produto): Observable<Produto> {
+    return this.http.post<Produto>(this.apiUrl, produto);
   }
 
-  atualizar(id: number, novoProduto: Produto): void {
-    const index = this.produtos.findIndex(p => p.id == id);
-    if (index !== -1)
-      this.produtos[index] = novoProduto;
+  atualizar(id: number, produto: Produto): Observable<Produto> {
+    return this.http.put<Produto>(`${this.apiUrl}${id}`, produto);
   }
 
-  excluir(id: number): void {
-    this.produtos = this.produtos.filter(p => p.id !== id);
+  excluir(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}${id}`);
   }
 }
 

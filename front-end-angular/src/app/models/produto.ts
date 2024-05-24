@@ -1,4 +1,4 @@
-// produto.model.ts
+// ./src/app/models/produto.model.ts
 
 export class Produto {
     id: number;
