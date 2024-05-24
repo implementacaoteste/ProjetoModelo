@@ -1,10 +1,10 @@
-# ./Makefile
+# ./front-end-angular/Makefile
 
 # Obter o nome da pasta atual
 DIR_NAME := $(shell basename "$(PWD)")
 
 # Variável para o nome do serviço no docker-compose
-SERVICE_NAME = app
+SERVICE_NAME = frontend
 TAG = latest
 
 build:
