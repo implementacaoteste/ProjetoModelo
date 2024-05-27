@@ -1,14 +1,15 @@
-# ./core/settings.py
+# .django-nija/src/core/settings.py
 
 from pathlib import Path
+from decouple import config, Csv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-d$oivi(4!ileo(^a89i7f#4t#v((c=k+$n*4(ouj(8m83%fzst'
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-d$oivi(4!ileo(^a89i7f#4t#v((c=k+$n*4(ouj(8m83%fzst')
 
-DEBUG = True
+DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost', cast=Csv())
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -63,14 +64,15 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #     }
 # }
 
+# Configurações do Banco de Dados
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'gestao_db',  # Nome do banco de dados
-        'USER': 'usuario_db',  # Usuário do banco de dados
-        'PASSWORD': '123457',  # Senha do banco de dados
-        'HOST': 'db',  # Nome do serviço do banco de dados
-        'PORT': '3306',
+        'ENGINE': config('DB_ENGINE', default = 'django.db.backends.sqlite3'),
+        'NAME': config('DB_DATABASE', default=BASE_DIR / 'db.sqlite'), # Nome do banco de dados
+        'USER': config('DB_USER'), # Usuário do banco de dados
+        'PASSWORD': config('DB_PASSWORD'), # Senha do banco de dados
+        'HOST': config('DB_HOST'), # Nome do serviço do banco de dados
+        'PORT': config('DB_PORT'),
     }
 }
 
