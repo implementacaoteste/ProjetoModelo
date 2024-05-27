@@ -5,11 +5,15 @@ import { ProdutoService } from '../../services/produto.service';
 import { Produto } from '../../models/produto';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { BarraBuscaComponent,  } from '../biblioteca-de-components/barra-busca/barra-busca.component';
+import { ListaResultadosComponent } from '../biblioteca-de-components/lista-resultados/lista-resultados.component';
+import { ConfirmacaoExclusaoModalComponent } from '../biblioteca-de-components/confirmacao-exclusao-modal/confirmacao-exclusao-modal.component';
 
 @Component({
   selector: 'app-consulta-produto',
   templateUrl: './consulta-produto.component.html',
-  imports: [FormsModule],
+  standalone: true,
+  imports: [FormsModule, BarraBuscaComponent, ListaResultadosComponent, ConfirmacaoExclusaoModalComponent],
   styleUrls: ['./consulta-produto.component.css']
 })
 export class ConsultaProdutoComponent implements OnInit {

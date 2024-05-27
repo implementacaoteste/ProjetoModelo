@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { ProdutoService } from '../../services/produto.service';
 import { MensagemCRUDComponent } from '../biblioteca-de-components/mensagem-crud/mensagem-crud.component';
 import { ActivatedRoute, Route } from '@angular/router';
+import { routes } from '../../app.routes';
 @Component({
   selector: 'app-cadastro-produto',
   standalone: true,
   templateUrl: './cadastro-produto.component.html',
-  imports: [FormsModule, MensagemCRUDComponent, Route],
+  imports: [FormsModule, MensagemCRUDComponent],
   styleUrls: ['./cadastro-produto.component.css']
 })
 export class CadastroProdutoComponent {
@@ -27,7 +28,7 @@ export class CadastroProdutoComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
+    //private router: Router,
     private produtoService: ProdutoService
   ) { };
 
