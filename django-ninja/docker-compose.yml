@@ -20,6 +20,8 @@ services:
   backend:
     build: .
     container_name: container_backend
+    profiles:
+      - dev
     volumes:
       - ./src:/app
     ports:
@@ -30,5 +32,15 @@ services:
     env_file:
       - .env
 
+  backend-prod:
+    build: .
+    container_name: container_backend_prod
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    restart: unless-stopped
+    env_file:
+      - .env
 
 

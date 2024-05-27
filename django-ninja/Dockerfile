@@ -43,7 +43,7 @@ WORKDIR /app
 
 # Copiar dependências instaladas e código da aplicação
 COPY --from=builder /venv /venv
-COPY . .
+COPY ./src .
 
 # Definir PATH do ambiente virtual
 ENV PATH="/venv/bin:$PATH"
