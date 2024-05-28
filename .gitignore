@@ -399,3 +399,6 @@ FodyWeavers.xsd
 venv/
 db_mysql/
 env/
+*.log
+.env
+.env.*

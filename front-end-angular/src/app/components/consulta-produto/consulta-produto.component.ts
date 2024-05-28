@@ -8,17 +8,18 @@ import { FormsModule } from '@angular/forms';
 import { BarraBuscaComponent,  } from '../biblioteca-de-components/barra-busca/barra-busca.component';
 import { ListaResultadosComponent } from '../biblioteca-de-components/lista-resultados/lista-resultados.component';
 import { ConfirmacaoExclusaoModalComponent } from '../biblioteca-de-components/confirmacao-exclusao-modal/confirmacao-exclusao-modal.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-consulta-produto',
   templateUrl: './consulta-produto.component.html',
   standalone: true,
-  imports: [FormsModule, BarraBuscaComponent, ListaResultadosComponent, ConfirmacaoExclusaoModalComponent],
+  imports: [FormsModule, BarraBuscaComponent, ListaResultadosComponent, ConfirmacaoExclusaoModalComponent, CommonModule],
   styleUrls: ['./consulta-produto.component.css']
 })
 export class ConsultaProdutoComponent implements OnInit {
   resultadoList: Produto[] = [];
-  colunaList: string[] =  ['id', 'nome', 'descricao', 'preco'];
+  colunaList: string[] =  ['id', 'nome', 'quantidade', 'preco'];
   entidade: string = 'produto';
   artigo: string = 'o';
   termoBusca: string = '';

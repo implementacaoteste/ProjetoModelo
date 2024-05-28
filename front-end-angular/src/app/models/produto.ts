@@ -3,14 +3,16 @@
 export class Produto {
     id: number;
     nome: string;
-    descricao: string;
+    quantidade: number;
     preco: number;
+    ativo: boolean;
   
-    constructor(id?: number, nome?: string, descricao?: string, preco?: number) {
+    constructor(id?: number, nome?: string, preco?: number, quantidade?: number, ativo?: boolean) {
       this.id = id || 0;
       this.nome = nome || '';
-      this.descricao = descricao || '';
+      this.quantidade = quantidade || 0;
       this.preco = preco || 0;
+      this.ativo = ativo || true;
     }
   }
   

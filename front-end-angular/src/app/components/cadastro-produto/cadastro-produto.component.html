@@ -1,27 +1,28 @@
 <!-- ./src/app/components/cadastro-produto/cadastro-produto.component.html -->
 
-<div class="container">
+<div>
+  <h1>{{ botaoAcao }} Produto</h1>
   <form (ngSubmit)="salvar()">
-    <div class="form-group">
-      <label for="nome">Nome</label>
-      <input id="nome" class="form-control" [(ngModel)]="novoProduto.nome" name="nome" required>
+    <div>
+      <label for="nome">Nome:</label>
+      <input id="nome" [(ngModel)]="novoProduto.nome" name="nome" required>
     </div>
-    <div class="form-group">
-      <label for="descricao">Descrição</label>
-      <textarea id="descricao" class="form-control" [(ngModel)]="novoProduto.descricao" name="descricao" required></textarea>
+    <div>
+      <label for="preco">Preço:</label>
+      <input id="preco" type="number" [(ngModel)]="novoProduto.preco" name="preco" required>
     </div>
-    <div class="form-group">
-      <label for="preco">Preço</label>
-      <input id="preco" class="form-control" [(ngModel)]="novoProduto.preco" name="preco" required type="number">
+    <div>
+      <label for="quantidade">Quantidade:</label>
+      <input id="quantidade" type="number" [(ngModel)]="novoProduto.quantidade" name="quantidade" required>
     </div>
-    <button type="submit" class="btn btn-primary">{{ botaoAcao }}</button>
-    <button type="button" class="btn btn-secondary" (click)="cancelarEdicao()">Cancelar</button>
+    <div>
+      <label for="ativo">Ativo:</label>
+      <input id="ativo" type="checkbox" [(ngModel)]="novoProduto.ativo" name="ativo">
+    </div>
+    <button type="submit">{{ botaoAcao }}</button>
+    <button type="button" (click)="cancelarEdicao()">Cancelar</button>
   </form>
-  
-  <app-mensagem-crud 
-    [tipo]="tipoMensagem" 
-    [nomeEntidade]="nomeEntidade" 
-    [letraDoCRUD]="botaoAcao === 'Salvar' ? 'C' : 'U'" 
-    [mensagem]="mensagem">
-  </app-mensagem-crud>
+  <app-mensagem-crud [tipo]="tipoMensagem" [mensagem]="mensagem"></app-mensagem-crud>
 </div>
+
+
